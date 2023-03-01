@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 import { useNavigate } from "react-router-dom";
@@ -15,6 +15,27 @@ const SignUp = ({ setStoredToken }) => {
   const [county, setCounty] = useState("");
   const [constituency, setConstituency] = useState("");
   const [profile_picture, setProfilePicture] = useState("");
+  const [counties, setCounties] = useState([]);
+  const [constituencies, setConstituencies] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:3000/counties")
+      .then((response) => response.json())
+      .then((data) => {
+        setCounties(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:3000/counties/${county}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.constituencies) {
+          setConstituencies(data.constituencies);
+        }
+      });
+  }, [county]);
+
   const uploadProfilePicture = (files) => {
     const formData = new FormData();
 
@@ -205,9 +226,9 @@ const SignUp = ({ setStoredToken }) => {
                         value={county}
                         onChange={(e) => setCounty(e.target.value)}
                       >
-                        <option value="Nairobi">Nairobi</option>
-                        <option value="Mombasa">Mombasa</option>
-                        <option value="Kisumu">Kisumu</option>
+                        {counties.map((county) => (
+                          <option value={county.name}>{county.name}</option>
+                        ))}
                       </select>
                     </div>
                   </div>
@@ -222,9 +243,13 @@ const SignUp = ({ setStoredToken }) => {
                         value={constituency}
                         onChange={(e) => setConstituency(e.target.value)}
                       >
-                        <option value="Nairobi">Nairobi</option>
-                        <option value="Mombasa">Mombasa</option>
-                        <option value="Kisumu">Kisumu</option>
+                        <option value="">Select a constituency</option>
+                        {constituencies.map((constituency) => (
+                          <option value={constituency.name}>
+                            {constituency.name}
+                          </option>
+                        ))}
+
                       </select>
                     </div>
                   </div>
