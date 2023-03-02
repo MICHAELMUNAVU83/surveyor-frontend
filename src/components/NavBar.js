@@ -26,7 +26,7 @@ const NavBar = ({ storedToken, setStoredToken }) => {
   return (
     <div
       style={{ backgroundColor: `${color}` }}
-      className="fixed left-0 top-0 w-full z-10 ease-in duration-300"
+      className="fixed left-0 top-0 w-full z-10 p-2 ease-in duration-300"
     >
       <div className="max-w-[1240px] m-auto flex justify-between items-center  text-white">
         <Link to="/">
@@ -38,26 +38,34 @@ const NavBar = ({ storedToken, setStoredToken }) => {
           <Link to="/">
             <li className="p-4">Home</li>
           </Link>
-          <Link to="/#gallery">
-            <li className="p-4">Gallery</li>
+          <Link to="/survey">
+            <li className="p-4">Survey</li>
           </Link>
-          <Link to="/work">
-            <li className="p-4">Work</li>
-          </Link>
-          <Link to="/contact">
-            <li className="p-4">Contact</li>
-          </Link>
-          <button
-            onClick={() => {
-              localStorage.setItem("token", "");
-              setStoredToken("");
-              setTimeout(() => {
-                navigate("/");
-              }, 1000);
-            }}
-          >
-            Log out
-          </button>
+          {!storedToken && (
+            <>
+              <Link to="/login">
+                <li className="p-4">Login</li>
+              </Link>
+
+              <Link to="/signup">
+                <li className="p-4">Sign Up</li>
+              </Link>
+            </>
+          )}
+
+          {storedToken && (
+            <button
+              onClick={() => {
+                localStorage.setItem("token", "");
+                setStoredToken("");
+                setTimeout(() => {
+                  navigate("/");
+                }, 1000);
+              }}
+            >
+              Log out
+            </button>
+          )}
         </ul>
 
         {/*Mobile button /> */}
@@ -80,7 +88,7 @@ const NavBar = ({ storedToken, setStoredToken }) => {
         <div
           className={
             nav
-              ? "sm:hidden absolute top-0 right-0 left-0 bottom-0 flex justify-center items-center  w-full h-screen bg-black text-white duration-300 ease-in-out"
+              ? "sm:hidden absolute top-0 right-0  left-0 bottom-0 flex justify-center items-center  w-full h-screen bg-black text-white duration-300 ease-in-out"
               : "sm:hidden absolute top-0 right-0 left-[-100%] bottom-0 flex justify-center items-center w-full h-screen bg-black text-white duration-300 ease-in-out"
           }
         >
@@ -88,15 +96,37 @@ const NavBar = ({ storedToken, setStoredToken }) => {
             <Link to="/" className="p-4 text-4xl hover:text-gray-500">
               <li>Home</li>
             </Link>
-            <Link to="/#gallery" className="p-4 text-4xl hover:text-gray-500">
-              <li>Gallery</li>
+            <Link to="/survey" className="p-4 text-4xl hover:text-gray-500">
+              <li> Survey</li>
             </Link>
-            <Link to="/work" className="p-4 text-4xl hover:text-gray-500">
-              <li>Work</li>
-            </Link>
-            <Link to="/contact" className="p-4 text-4xl hover:text-gray-500">
-              <li>Contact</li>
-            </Link>
+            {!storedToken && (
+              <>
+                <Link to="/login">
+                  <li className="p-4">Login</li>
+                </Link>
+
+                <Link to="/signup">
+                  <li className="p-4">Sign Up</li>
+                </Link>
+              </>
+            )}
+
+            {storedToken && (
+              <button
+                className="flex justify-center items-center"
+                onClick={() => {
+                  localStorage.setItem("token", "");
+                  setStoredToken("");
+                  setTimeout(() => {
+                    navigate("/");
+                  }, 1000);
+                }}
+              >
+                <li className="mx-auto text-4xl text-center hover:text-gray-500">
+                  Log out
+                </li>
+              </button>
+            )}
           </ul>
         </div>
       </div>
