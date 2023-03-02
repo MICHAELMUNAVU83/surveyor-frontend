@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-function Hello({ setStoredToken }) {
+function Home() {
   const [name, setName] = useState("");
   useEffect(() => {
-    fetch("/api/v1/profile ", {
+    fetch("http://127.0.0.1:3000/api/v1/profile ", {
       method: "GET",
       headers: {
         Accepts: "application/json",
@@ -15,19 +15,7 @@ function Hello({ setStoredToken }) {
       .then((data) => setName(data.user.username));
   }, []);
 
-  return (
-    <div>
-      Hello {name}
-      <button
-        onClick={() => {
-          localStorage.setItem("token", "");
-          setStoredToken("");
-        }}
-      >
-        Log out
-      </button>
-    </div>
-  );
+  return <div className="mt-20 text-center">Home {name}</div>;
 }
 
-export default Hello;
+export default Home;
