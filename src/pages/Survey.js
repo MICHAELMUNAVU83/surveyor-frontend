@@ -11,26 +11,26 @@ const Survey = () => {
                 <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
                   <div>
                     <label className="block text-sm font-medium te/xt-gray-700">
-                      Average Monthly Income
+                      Average Monthly Income (Ksh)
                     </label>
                     <div className="mt-1">
                       <input
-                        type={"text"}
+                        type={"number"}
                         className=" border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                        placeholder="John Doe"
+                        placeholder="20000"
                       />
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium te/xt-gray-700">
-                      Average Monthly Expenses
+                      Average Monthly Expenses (Ksh)
                     </label>
                     <div className="mt-1">
                       <input
-                        type={"text"}
+                        type={"number"}
                         className=" border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                        placeholder="John Doe"
+                        placeholder="15000"
                       />
                     </div>
                   </div>
