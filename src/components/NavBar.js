@@ -101,12 +101,12 @@ const NavBar = ({ storedToken, setStoredToken }) => {
             </Link>
             {!storedToken && (
               <>
-                <Link to="/login">
-                  <li className="p-4">Login</li>
+                <Link to="/login" className="p-4 text-4xl hover:text-gray-500">
+                  <li>Login</li>
                 </Link>
 
-                <Link to="/signup">
-                  <li className="p-4">Sign Up</li>
+                <Link to="/signup" className="p-4 text-4xl hover:text-gray-500">
+                  <li>Sign Up</li>
                 </Link>
               </>
             )}
