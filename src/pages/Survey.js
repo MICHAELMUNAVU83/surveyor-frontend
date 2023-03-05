@@ -1,6 +1,39 @@
 import React, { useState, useEffect } from "react";
+import { BsEmojiLaughingFill } from "react-icons/bs";
+import { BsFillEmojiSmileFill } from "react-icons/bs";
+import { BsFillEmojiNeutralFill } from "react-icons/bs";
+import { BsFillEmojiFrownFill } from "react-icons/bs";
 
 const Survey = () => {
+  const [language, setLanguage] = useState("");
+  useEffect(() => {
+    console.log(language);
+  }, [language]);
+  const emojis = [
+    {
+      id: 1,
+      icon: <BsEmojiLaughingFill size={20} />,
+      text: "Very Satisfied",
+    },
+    {
+      id: 2,
+      icon: <BsFillEmojiSmileFill size={20} />,
+      text: "Satisfied",
+    },
+    {
+      id: 3,
+      icon: <BsFillEmojiNeutralFill size={20} />,
+      text: "Neutral",
+
+    },
+    {
+      id: 4,
+      icon: <BsFillEmojiFrownFill size={20} />,
+      text: "Dissatisfied",
+     
+    },
+  ];
+
   return (
     <>
       <div className="mt-24">
@@ -48,21 +81,24 @@ const Survey = () => {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium te/xt-gray-700">
-                      Password
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type={"password"}
-                        className=" border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                        placeholder="********"
-                      />
-                    </div>
-                    <p>
-                      <span className="text-sm text-gray-500">
-                        Password must be at least 6 characters long
-                      </span>
-                    </p>
+                    {emojis.map((emoji) => (
+                      <div
+                        key={emoji.id}
+                        className="flex items-center space-x-2 space-y-2"
+                        onClick={() => setLanguage(emoji.text)}
+                      >
+                        <input
+                          type="radio"
+                          name="language"
+                          value={emoji.text}
+                          className="focus:ring-blue-500 h-6 w-6 text-blue-600 border-gray-300"
+                        />
+
+                        <span className="text-md flex gap-2 text-gray-500">
+                          {emoji.icon} {emoji.text}
+                        </span>
+                      </div>
+                    ))}
                   </div>
 
                   <div>
