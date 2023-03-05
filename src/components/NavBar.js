@@ -1,46 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 const NavBar = ({ storedToken, setStoredToken }) => {
   const navigate = useNavigate();
   const [nav, setNav] = useState(false);
-  const [color, setColor] = useState("black");
-  const [textColor, setTextColor] = useState("white");
 
-  useEffect(() => {
-    const changeBackground = () => {
-      if (window.scrollY >= 80) {
-        setColor("white");
-        setTextColor("black");
-      } else {
-        setColor("black");
-        setTextColor("white");
-      }
-    };
-    window.addEventListener("scroll", changeBackground);
-  }, []);
+  
 
   const toggleNav = () => {
     setNav(!nav);
   };
   return (
     <div
-      style={{ backgroundColor: `${color}` }}
-      className="fixed left-0 top-0 w-full z-10 p-2 ease-in duration-300"
+     
+      className="fixed left-0 top-0 w-full z-10  bg-gray-900 ease-in duration-300"
     >
       <div className="max-w-[1240px] m-auto flex justify-between items-center  text-white">
         <Link to="/">
-          <h1 style={{ color: `${textColor}` }} className="font-bold text-4xl ">
-            Logo
+          <h1 className="font-bold text-white mx-2 text-xl md:text-4xl ">
+            Survey Kenya
           </h1>
         </Link>
-        <ul style={{ color: `${textColor}` }} className="hidden sm:flex">
+        <ul className="hidden text-white sm:flex">
           <Link to="/">
             <li className="p-4">Home</li>
           </Link>
           {storedToken && (
             <Link to="/survey">
-              <li className="p-4">Survey</li>
+              <li className="p-4">Take Survey</li>
             </Link>
           )}
           {!storedToken && (
@@ -71,18 +58,18 @@ const NavBar = ({ storedToken, setStoredToken }) => {
         </ul>
 
         {/*Mobile button /> */}
-        <div className="sm:hidden block z-10">
+        <div className="sm:hidden block mx-2 z-10">
           {nav ? (
             <AiOutlineClose
-              className="text-4xl"
+              className="text-xl text-white"
               onClick={toggleNav}
-              style={{ color: `${textColor}` }}
+              
             />
           ) : (
             <AiOutlineMenu
-              className="text-4xl"
+              className="text-xl text-white"
               onClick={toggleNav}
-              style={{ color: `${textColor}` }}
+              
             />
           )}
         </div>
@@ -96,11 +83,11 @@ const NavBar = ({ storedToken, setStoredToken }) => {
         >
           <ul onClick={toggleNav}>
             <Link to="/" className="p-4 text-4xl hover:text-gray-500">
-              <li>Home</li>
+              <li>Survey Kenya </li>
             </Link>
             {storedToken && (
               <Link to="/survey" className="p-4 text-4xl hover:text-gray-500">
-                <li> Survey</li>
+                <li>Take Survey</li>
               </Link>
             )}
             {!storedToken && (

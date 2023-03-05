@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import loginimg from "./loginimg.jpg";
+import loginimg from "./home.png";
 import "react-toastify/dist/ReactToastify.css";
 function Login({ setStoredToken }) {
   const [email, setEmail] = useState("");
@@ -61,7 +61,7 @@ function Login({ setStoredToken }) {
               />
             </div>
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-[#9d6ef4] md:text-2xl ">
+              <h1 className="text-xl font-bold leading-tight tracking-tight  text-blue-700 md:text-2xl ">
                 Sign in to your account
               </h1>
               <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
@@ -96,7 +96,8 @@ function Login({ setStoredToken }) {
 
                 <button
                   type="submit"
-                  className="w-full text-white bg-[#9d6ef4] border border-transparent rounded-lg py-2.5 px-4 hover:bg-[#9d6ef4] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600"
+                  className="w-full text-white  bg-blue-700  border border-transparent rounded-lg py-2.5 px-4 hover:scale-105   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600
+                  transition duration-500 ease-in-out"
                 >
                   Sign in
                 </button>

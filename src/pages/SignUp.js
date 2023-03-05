@@ -278,7 +278,7 @@ const SignUp = ({ setStoredToken }) => {
                 <div className="bg-gray-50 flex justify-center px-4 py-3 text-right sm:px-6">
                   <button
                     type="submit"
-                    className=" text-center rounded-md border border-transparent bg-[#9d6ef4] py-2 px-4  font-bold text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className=" text-center rounded-md border border-transparent  bg-blue-700 py-2 px-4  font-bold text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
                     Sign Up Now
                   </button>
