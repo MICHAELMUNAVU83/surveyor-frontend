@@ -3,12 +3,30 @@ import { BsEmojiLaughingFill } from "react-icons/bs";
 import { BsFillEmojiSmileFill } from "react-icons/bs";
 import { BsFillEmojiNeutralFill } from "react-icons/bs";
 import { BsFillEmojiFrownFill } from "react-icons/bs";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 const Survey = () => {
-  const [language, setLanguage] = useState("");
+  const [happy_with_tax, setHappy_with_tax] = useState("");
+  const [happy_with_county_govt, setHappy_with_county_govt] = useState("");
+  const [happy_with_national_govt, setHappy_with_national_govt] = useState("");
+  const [average_monthly_income, setAverage_monthly_income] = useState("");
+  const [average_monthly_expenses, setAverage_monthly_expenses] = useState("");
+  const [userId, setUserId] = useState("");
+  const navigate = useNavigate();
+
   useEffect(() => {
-    console.log(language);
-  }, [language]);
+    fetch("http://127.0.0.1:3000/api/v1/profile ", {
+      method: "GET",
+      headers: {
+        Accepts: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setUserId(data.user.id));
+  }, []);
   const emojis = [
     {
       id: 1,
@@ -32,12 +50,62 @@ const Survey = () => {
     },
   ];
 
+  const submitSurvey = (e) => {
+    e.preventDefault();
+    fetch("http://127.0.0.1:3000/surveys", {
+      method: "POST",
+      headers: {
+        Accepts: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        average_salary_per_month: average_monthly_income,
+        average_expenses_per_month: average_monthly_expenses,
+        happy_with_county_gov: happy_with_county_govt,
+        happy_with_nat_gov: happy_with_national_govt,
+        happy_with_taxes: happy_with_tax,
+        user_id: userId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          data.error.forEach((error) => {
+            toast.error(error, {
+              position: "top-center",
+              autoClose: 6000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          });
+        } else {
+          toast.success("Survey Submitted Successfully", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setTimeout(() => {
+            navigate("/");
+          }, 5000);
+        }
+      });
+  };
+
   return (
     <>
       <div className="mt-24">
         <div className="md:max-w-[50%] w-[80%] mx-auto py-6 sm:px-6 lg:px-8">
           <div className="mt-5 md:col-span-2 md:mt-0">
-            <form>
+            <form onSubmit={submitSurvey}>
               <div className="shadow sm:overflow-hidden sm:rounded-md">
                 <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
                   <div>
@@ -49,6 +117,10 @@ const Survey = () => {
                         type={"number"}
                         className=" border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                         placeholder="20000"
+                        value={average_monthly_income}
+                        onChange={(e) =>
+                          setAverage_monthly_income(e.target.value)
+                        }
                       />
                     </div>
                   </div>
@@ -62,36 +134,28 @@ const Survey = () => {
                         type={"number"}
                         className=" border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                         placeholder="15000"
+                        value={average_monthly_expenses}
+                        onChange={(e) =>
+                          setAverage_monthly_expenses(e.target.value)
+                        }
                       />
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium te/xt-gray-700">
-                      Email
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type={"email"}
-                        className=" border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                        placeholder="johndoe@gmail.com"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium te/xt-gray-700">
-                      Are you satisfied with the services offered by the bank?
+                      Are you satisfied with the amount of tax you pay?
                     </label>
                     {emojis.map((emoji) => (
                       <div
                         key={emoji.id}
                         className="flex items-center space-x-2 space-y-2"
-                        onClick={() => setLanguage(emoji.text)}
                       >
                         <input
                           type="radio"
                           name="happy_with_taxes"
-                          value={emoji.text}
+                          value={emoji.id}
+                          onChange={(e) => setHappy_with_tax(e.target.value)}
                           className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
                         />
 
@@ -103,18 +167,20 @@ const Survey = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium te/xt-gray-700">
-                      Are you satisfied with the services offered by the bank?
+                      Are you satisfied with your county government?
                     </label>
                     {emojis.map((emoji) => (
                       <div
                         key={emoji.id}
                         className="flex items-center space-x-2 space-y-2"
-                        onClick={() => setLanguage(emoji.text)}
                       >
                         <input
                           type="radio"
-                          name="happy_with_taxes"
-                          value={emoji.text}
+                          name="happy_with_county_govt"
+                          value={emoji.id}
+                          onChange={(e) =>
+                            setHappy_with_county_govt(e.target.value)
+                          }
                           className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
                         />
 
@@ -127,20 +193,28 @@ const Survey = () => {
 
                   <div>
                     <label className="block text-sm font-medium te/xt-gray-700">
-                      Password Confirmation
+                      Are you satisfied with your National Government?
                     </label>
-                    <div className="mt-1">
-                      <input
-                        type={"password"}
-                        className=" border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                        placeholder="********"
-                      />
-                    </div>
-                    <p>
-                      <span className="text-sm text-gray-500">
-                        Re-enter your password
-                      </span>
-                    </p>
+                    {emojis.map((emoji) => (
+                      <div
+                        key={emoji.id}
+                        className="flex items-center space-x-2 space-y-2"
+                      >
+                        <input
+                          type="radio"
+                          name="happy_with_nat_govt"
+                          value={emoji.id}
+                          onChange={(e) =>
+                            setHappy_with_national_govt(e.target.value)
+                          }
+                          className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
+                        />
+
+                        <span className="text-md flex gap-2 text-gray-500">
+                          {emoji.icon} {emoji.text}
+                        </span>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
@@ -149,11 +223,12 @@ const Survey = () => {
                     type="submit"
                     className=" text-center rounded-md border border-transparent bg-[#9d6ef4] py-2 px-4  font-bold text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    Sign Up Now
+                    Submit Survey
                   </button>
                 </div>
               </div>
             </form>
+            <ToastContainer />
           </div>
         </div>
       </div>
