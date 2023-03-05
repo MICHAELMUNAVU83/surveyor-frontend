@@ -24,13 +24,11 @@ const Survey = () => {
       id: 3,
       icon: <BsFillEmojiNeutralFill size={20} />,
       text: "Neutral",
-
     },
     {
       id: 4,
       icon: <BsFillEmojiFrownFill size={20} />,
       text: "Dissatisfied",
-     
     },
   ];
 
@@ -81,6 +79,9 @@ const Survey = () => {
                     </div>
                   </div>
                   <div>
+                    <label className="block text-sm font-medium te/xt-gray-700">
+                      Are you satisfied with the services offered by the bank?
+                    </label>
                     {emojis.map((emoji) => (
                       <div
                         key={emoji.id}
@@ -89,9 +90,32 @@ const Survey = () => {
                       >
                         <input
                           type="radio"
-                          name="language"
+                          name="happy_with_taxes"
                           value={emoji.text}
-                          className="focus:ring-blue-500 h-6 w-6 text-blue-600 border-gray-300"
+                          className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
+                        />
+
+                        <span className="text-md flex gap-2 text-gray-500">
+                          {emoji.icon} {emoji.text}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium te/xt-gray-700">
+                      Are you satisfied with the services offered by the bank?
+                    </label>
+                    {emojis.map((emoji) => (
+                      <div
+                        key={emoji.id}
+                        className="flex items-center space-x-2 space-y-2"
+                        onClick={() => setLanguage(emoji.text)}
+                      >
+                        <input
+                          type="radio"
+                          name="happy_with_taxes"
+                          value={emoji.text}
+                          className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
                         />
 
                         <span className="text-md flex gap-2 text-gray-500">

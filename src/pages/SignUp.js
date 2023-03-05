@@ -15,6 +15,7 @@ const SignUp = ({ setStoredToken }) => {
   const [county, setCounty] = useState("");
   const [constituency, setConstituency] = useState("");
   const [profile_picture, setProfilePicture] = useState("");
+  const [gender, setGender] = useState("");
   const [counties, setCounties] = useState([]);
   const [constituencies, setConstituencies] = useState([]);
 
@@ -67,6 +68,7 @@ const SignUp = ({ setStoredToken }) => {
           county,
           constituency,
           profile_picture,
+          gender
         },
       }),
     })
@@ -216,6 +218,24 @@ const SignUp = ({ setStoredToken }) => {
                       </span>
                     </p>
                   </div>
+
+                  <div>
+                    <label className="block text-sm font-medium te/xt-gray-700">
+                      Gender
+                    </label>
+                    <div className="mt-1">
+                      <select
+                        className=" border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                        value={gender}
+                        onChange={(e) => setGender(e.target.value)}
+                      >
+                        <option value="">Gender </option>
+
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                      </select>
+                    </div>
+                  </div>
                   <div>
                     <label className="block text-sm font-medium te/xt-gray-700">
                       Select a County
@@ -249,7 +269,6 @@ const SignUp = ({ setStoredToken }) => {
                             {constituency.name}
                           </option>
                         ))}
-
                       </select>
                     </div>
                   </div>
