@@ -38,7 +38,7 @@ const PieChart = () => {
   }, []);
 
   const data = {
-    labels: ["Male" , "Female"],
+    labels: ["Male", "Female"],
     datasets: [
       {
         label: "Number of surveys",
@@ -62,13 +62,7 @@ const PieChart = () => {
     },
   };
 
-    return (
-        <div className="flex flex-col h-[500px] justify-center items-center">
-            86gh
-            <Pie data={data} options={options} />
-        </div>
-
-    )   
+  return <Pie data={data} options={options} />;
 };
 
 export default PieChart;
