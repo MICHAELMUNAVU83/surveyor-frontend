@@ -38,9 +38,11 @@ const NavBar = ({ storedToken, setStoredToken }) => {
           <Link to="/">
             <li className="p-4">Home</li>
           </Link>
-          <Link to="/survey">
-            <li className="p-4">Survey</li>
-          </Link>
+          {storedToken && (
+            <Link to="/survey">
+              <li className="p-4">Survey</li>
+            </Link>
+          )}
           {!storedToken && (
             <>
               <Link to="/login">
@@ -96,9 +98,11 @@ const NavBar = ({ storedToken, setStoredToken }) => {
             <Link to="/" className="p-4 text-4xl hover:text-gray-500">
               <li>Home</li>
             </Link>
-            <Link to="/survey" className="p-4 text-4xl hover:text-gray-500">
-              <li> Survey</li>
-            </Link>
+            {storedToken && (
+              <Link to="/survey" className="p-4 text-4xl hover:text-gray-500">
+                <li> Survey</li>
+              </Link>
+            )}
             {!storedToken && (
               <>
                 <Link to="/login" className="p-4 text-4xl hover:text-gray-500">

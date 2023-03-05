@@ -68,7 +68,7 @@ const SignUp = ({ setStoredToken }) => {
           county,
           constituency,
           profile_picture,
-          gender
+          gender,
         },
       }),
     })
@@ -246,6 +246,7 @@ const SignUp = ({ setStoredToken }) => {
                         value={county}
                         onChange={(e) => setCounty(e.target.value)}
                       >
+                        <option value="">Select a county</option>
                         {counties.map((county) => (
                           <option value={county.name}>{county.name}</option>
                         ))}

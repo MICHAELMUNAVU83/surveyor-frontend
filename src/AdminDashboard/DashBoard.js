@@ -1,5 +1,6 @@
 import PieChart from "./PieChart";
 import LineChart from "./LineChart";
+import VerticalBar from "./VerticalBar";
 import AreaChart from "./AreaChart";
 function DashBoard() {
   return (
@@ -12,6 +13,9 @@ function DashBoard() {
       </div>
       <div className="md:h-[500px]  ">
         <AreaChart />
+      </div>
+      <div className="md:h-[500px]  ">
+        <VerticalBar />
       </div>
     </div>
   );

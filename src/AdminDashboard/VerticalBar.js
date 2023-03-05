@@ -3,28 +3,25 @@ import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
-  Filler,
   Legend,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
-  Filler,
   Legend
 );
 
-const AreaChat = () => {
+const VerticalBar = () => {
   const [users, setUsers] = useState([]);
+
   useEffect(() => {
     fetch("http://localhost:3000/api/v1/users", {
       method: "GET",
@@ -40,13 +37,14 @@ const AreaChat = () => {
   }, []);
   const options = {
     responsive: true,
+    height: 500,
     plugins: {
       legend: {
         position: "top",
       },
       title: {
         display: true,
-        text: "Satisfaction with leadership (1-Very Satisfied, 4-Very Dissatisfied)",
+        text: "Satisfaction with taxes paid (1-Very Satisfied, 4-Very Dissatisfied)",
       },
     },
   };
@@ -57,23 +55,14 @@ const AreaChat = () => {
     labels,
     datasets: [
       {
-        fill: true,
-        label: "Satisfaction with County Government",
-        data: users.map((user) => user.survey.happy_with_county_gov),
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
-      },
-      {
-        fill: true,
-        label: "Satisfaction with National Government",
-        data: users.map((user) => user.survey.happy_with_nat_gov),
-
-        borderColor: "rgb(255, 99, 132)",
+        label: "Satisfaction with taxes paid",
+        data: users.map((user) => user.survey.happy_with_taxes),
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
     ],
   };
-  return <Line options={options} data={data} />;
+
+  return <Bar options={options} data={data} />;
 };
 
-export default AreaChat;
+export default VerticalBar;
