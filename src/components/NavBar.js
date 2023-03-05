@@ -1,20 +1,15 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-const NavBar = ({ storedToken, setStoredToken }) => {
+const NavBar = ({ storedToken, setStoredToken, role }) => {
   const navigate = useNavigate();
   const [nav, setNav] = useState(false);
-
-  
 
   const toggleNav = () => {
     setNav(!nav);
   };
   return (
-    <div
-     
-      className="fixed left-0 top-0 w-full z-10  bg-gray-900 ease-in duration-300"
-    >
+    <div className="fixed left-0 top-0 w-full z-10  bg-gray-900 ease-in duration-300">
       <div className="max-w-[1240px] m-auto flex justify-between items-center  text-white">
         <Link to="/">
           <h1 className="font-bold text-white mx-2 text-xl md:text-4xl ">
@@ -25,7 +20,7 @@ const NavBar = ({ storedToken, setStoredToken }) => {
           <Link to="/">
             <li className="p-4">Home</li>
           </Link>
-          {storedToken && (
+          {storedToken && role == !"admin" && (
             <Link to="/survey">
               <li className="p-4">Take Survey</li>
             </Link>
@@ -63,14 +58,9 @@ const NavBar = ({ storedToken, setStoredToken }) => {
             <AiOutlineClose
               className="text-xl text-white"
               onClick={toggleNav}
-              
             />
           ) : (
-            <AiOutlineMenu
-              className="text-xl text-white"
-              onClick={toggleNav}
-              
-            />
+            <AiOutlineMenu className="text-xl text-white" onClick={toggleNav} />
           )}
         </div>
         {/*Mobile menu /> */}
@@ -85,7 +75,7 @@ const NavBar = ({ storedToken, setStoredToken }) => {
             <Link to="/" className="p-4 text-4xl hover:text-gray-500">
               <li>Survey Kenya </li>
             </Link>
-            {storedToken && (
+            {storedToken && role == !"admin" && (
               <Link to="/survey" className="p-4 text-4xl hover:text-gray-500">
                 <li>Take Survey</li>
               </Link>

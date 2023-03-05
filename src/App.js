@@ -31,7 +31,7 @@ function App() {
   return (
     <div>
       <Router>
-        <NavBar storedToken={storedToken} setStoredToken={setStoredToken} />
+        <NavBar storedToken={storedToken} setStoredToken={setStoredToken} role={role} />
         <Routes>
           {storedToken ? (
             <>
