@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import DashBoard from "../AdminDashboard/DashBoard";
 function Home() {
   const [name, setName] = useState("");
   useEffect(() => {
@@ -15,7 +15,12 @@ function Home() {
       .then((data) => setName(data.user.username));
   }, []);
 
-  return <div className="mt-20 text-center">Home {name}</div>;
+  return (
+    <div className="mt-20 text-center">
+      <h1 className="text-4xl font-bold">Welcome {name}</h1>
+      <DashBoard />
+    </div>
+  );
 }
 
 export default Home;

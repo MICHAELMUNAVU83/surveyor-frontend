@@ -102,7 +102,7 @@ const Survey = () => {
 
   return (
     <>
-      <div className="mt-24">
+      <div className="mt-16">
         <div className="md:max-w-[50%] w-[80%] mx-auto py-6 sm:px-6 lg:px-8">
           <div className="mt-5 md:col-span-2 md:mt-0">
             <form onSubmit={submitSurvey}>
