@@ -57,7 +57,7 @@ const PieChart = () => {
       },
       title: {
         display: true,
-        text: "Pie Chart",
+        text: "Number of Surveys taken by male and female users",
       },
     },
   };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -45,7 +45,7 @@ const LineChart = () => {
       },
       title: {
         display: true,
-        text: "Line Chart",
+        text: "Average Salary and Expenses per Month",
       },
     },
   };
@@ -56,14 +56,14 @@ const LineChart = () => {
     labels,
     datasets: [
       {
-        label: "Dataset 1",
+        label: "Average Salary per Month in Ksh",
         data: users.map((user) => user.survey.average_salary_per_month),
 
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
       {
-        label: "Dataset 2",
+        label: "Average Expenses per Month in Ksh",
         data: users.map((user) => user.survey.average_expenses_per_month),
 
         borderColor: "rgb(53, 162, 235)",
@@ -71,7 +71,7 @@ const LineChart = () => {
       },
     ],
   };
-  return <LineChart data={data} options={options} />;
+  return <Line data={data} options={options} />;
 };
 
 export default LineChart;
