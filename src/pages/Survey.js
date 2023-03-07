@@ -84,16 +84,21 @@ const Survey = () => {
             });
           });
         } else {
-          toast.success("Survey Submitted Successfully", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+          toast.success(
+            language === "english"
+              ? "Survey Submitted"
+              : "Asante kwa kuchangia",
+            {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            }
+          );
           setTimeout(() => {
             navigate("/");
           }, 3000);
@@ -251,7 +256,10 @@ const Survey = () => {
                     type="submit"
                     className=" text-center rounded-md border border-transparent  bg-blue-700 py-2 px-4  font-bold text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    Submit Survey
+                    {language === "english"
+                      ? "Submit Survey" 
+                      : "Wasilisha Uchunguzi"}
+                        
                   </button>
                 </div>
               </div>

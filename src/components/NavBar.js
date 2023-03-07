@@ -9,18 +9,18 @@ const NavBar = ({ storedToken, setStoredToken, role }) => {
     setNav(!nav);
   };
   return (
-    <div className="fixed left-0 top-0 w-full z-10  bg-gray-900 ease-in duration-300">
+    <div className="fixed left-0 top-0 w-full z-10  bg-blue-700 ease-in duration-300">
       <div className="max-w-[1240px] m-auto flex justify-between items-center  text-white">
         <Link to="/">
           <h1 className="font-bold text-white mx-2 text-xl md:text-4xl ">
             Survey Kenya
           </h1>
         </Link>
-        <ul className="hidden text-white sm:flex">
+        <ul className="hidden font-bold text-white sm:flex">
           <Link to="/">
             <li className="p-4">Home</li>
           </Link>
-          {storedToken && role == !"admin" && (
+          {storedToken && role !== "admin" && (
             <Link to="/survey">
               <li className="p-4">Take Survey</li>
             </Link>
@@ -67,15 +67,15 @@ const NavBar = ({ storedToken, setStoredToken, role }) => {
         <div
           className={
             nav
-              ? "sm:hidden absolute top-0 right-0  left-0 bottom-0 flex justify-center items-center  w-full h-screen bg-black text-white duration-300 ease-in-out"
-              : "sm:hidden absolute top-0 right-0 left-[-100%] bottom-0 flex justify-center items-center w-full h-screen bg-black text-white duration-300 ease-in-out"
+              ? "sm:hidden absolute top-0 right-0  left-0 bottom-0 flex justify-center items-center  w-full h-screen bg-blue-700 text-white duration-300 ease-in-out"
+              : "sm:hidden absolute top-0 right-0 left-[-100%] bottom-0 flex justify-center items-center w-full h-screen bg-blue-700 text-white duration-300 ease-in-out"
           }
         >
-          <ul onClick={toggleNav}>
+          <ul className="font-bold" onClick={toggleNav}>
             <Link to="/" className="p-4 text-4xl hover:text-gray-500">
               <li>Survey Kenya </li>
             </Link>
-            {storedToken && role == !"admin" && (
+            {storedToken && role !== "admin" && (
               <Link to="/survey" className="p-4 text-4xl hover:text-gray-500">
                 <li>Take Survey</li>
               </Link>
