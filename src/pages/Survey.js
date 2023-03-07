@@ -27,26 +27,27 @@ const Survey = () => {
       .then((res) => res.json())
       .then((data) => setUserId(data.user.id));
   }, []);
+  const [language, setLanguage] = useState("english");
   const emojis = [
     {
       id: 1,
       icon: <BsEmojiLaughingFill size={20} />,
-      text: "Very Satisfied",
+      text: language === "english" ? "Very Satisfied" : "Nimefurahi sana",
     },
     {
       id: 2,
       icon: <BsFillEmojiSmileFill size={20} />,
-      text: "Satisfied",
+      text: language === "english" ? "Satisfied" : "Nimefurahi",
     },
     {
       id: 3,
       icon: <BsFillEmojiNeutralFill size={20} />,
-      text: "Neutral",
+      text: language === "english" ? "Neutral" : "Wastani",
     },
     {
       id: 4,
       icon: <BsFillEmojiFrownFill size={20} />,
-      text: "Dissatisfied",
+      text: language === "english" ? "Not Satisfied" : "Sijafurahi",
     },
   ];
 
@@ -108,9 +109,28 @@ const Survey = () => {
             <form onSubmit={submitSurvey}>
               <div className="shadow sm:overflow-hidden sm:rounded-md">
                 <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
+                  <label className="block text-sm font-medium te/xt-gray-700">
+                    Choose The Language You Want To Take the survey in
+                  </label>
+                  <div className="mt-1">
+                    <select
+                      className=" border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                      value={language}
+                      onChange={(e) => setLanguage(e.target.value)}
+                    >
+                      <option value="">Select a Language</option>
+
+                      <option value="english">English</option>
+                      <option value="kiswahili">Kiswahili</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
                   <div>
                     <label className="block text-sm font-medium te/xt-gray-700">
-                      Average Monthly Income (Ksh)
+                      {language === "english"
+                        ? "What is your average monthly income?"
+                        : "Je, ni kiasi gani cha kipato chako kwa mwezi?"}
                     </label>
                     <div className="mt-1">
                       <input
@@ -127,7 +147,9 @@ const Survey = () => {
 
                   <div>
                     <label className="block text-sm font-medium te/xt-gray-700">
-                      Average Monthly Expenses (Ksh)
+                      {language === "english"
+                        ? "What is your average monthly expenses?"
+                        : "Je, ni kiasi gani cha matumizi yako kwa mwezi?"}{" "}
                     </label>
                     <div className="mt-1">
                       <input
@@ -144,7 +166,9 @@ const Survey = () => {
 
                   <div>
                     <label className="block text-sm font-medium te/xt-gray-700">
-                      Are you satisfied with the amount of tax you pay?
+                      {language === "english"
+                        ? "Are you happy with the taxes you pay?"
+                        : "Je, una furaha na kodi unayolipa?"}
                     </label>
                     {emojis.map((emoji) => (
                       <div
@@ -167,7 +191,9 @@ const Survey = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium te/xt-gray-700">
-                      Are you satisfied with your county government?
+                      {language === "english"
+                        ? "Are you happy with the county government?"
+                        : "Je, una furaha na serikali ya kaunti?"}
                     </label>
                     {emojis.map((emoji) => (
                       <div
@@ -193,7 +219,9 @@ const Survey = () => {
 
                   <div>
                     <label className="block text-sm font-medium te/xt-gray-700">
-                      Are you satisfied with your National Government?
+                      {language === "english"
+                        ? "Are you happy with the national government?"
+                        : "Je, una furaha na serikali ya taifa?"}
                     </label>
                     {emojis.map((emoji) => (
                       <div
